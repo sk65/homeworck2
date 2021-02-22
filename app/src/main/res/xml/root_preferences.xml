@@ -1,0 +1,14 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="@string/settings_header">
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="switchPreference_changeTheme"
+            android:title="@string/change_theme_title" />
+        <ListPreference
+            android:defaultValue="@string/language_english"
+            android:entries="@array/languages"
+            android:entryValues="@array/languages"
+            android:key="list_preference_selectLanguage"
+            android:title="@string/change_languages_title" />
+    </PreferenceCategory>
+</PreferenceScreen>

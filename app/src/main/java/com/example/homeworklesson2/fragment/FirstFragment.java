@@ -14,9 +14,10 @@ import com.example.homeworklesson2.FragmentCallback;
 import com.example.homeworklesson2.R;
 
 public class FirstFragment extends Fragment implements View.OnClickListener {
+
     public static final String TAG = "FirstFragmentTag";
-    private EditText editText;
-    public static final String MESSAGE_KEY = "com.example.homeworklesson2.fragment.firstFragment.MESSAGE";
+    private EditText editTextSendMessage;
+    private static final String MESSAGE_KEY = "com.example.homeworklesson2.fragment.firstFragment.MESSAGE";
 
     public FirstFragment() {
         super(R.layout.fragment_first);
@@ -35,16 +36,17 @@ public class FirstFragment extends Fragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);
         Bundle args = getArguments();
         if (args != null && args.containsKey(MESSAGE_KEY)) {
-            TextView textView = getActivity().findViewById(R.id.textView_fragmentFirst);
+            TextView textView = view.findViewById(R.id.textView_fragmentFirst);
             textView.setText(requireArguments().getString(MESSAGE_KEY));
         }
-        editText = getActivity().findViewById(R.id.editText_fragmentFirst);
-        getActivity().findViewById(R.id.button_fragmentFirst_sendMessage).setOnClickListener(this);
+
+        editTextSendMessage = view.findViewById(R.id.editText_fragmentFirst);
+        view.findViewById(R.id.button_fragmentFirst_sendMessage).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         FragmentCallback fragmentCallback = (FragmentCallback) getParentFragment();
-        fragmentCallback.setText(editText.getText().toString(), getTag());
+        fragmentCallback.setText(editTextSendMessage.getText().toString(), getTag());
     }
 }

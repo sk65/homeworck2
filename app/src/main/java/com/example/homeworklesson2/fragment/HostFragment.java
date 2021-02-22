@@ -1,7 +1,9 @@
 package com.example.homeworklesson2.fragment;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,20 +14,21 @@ import com.example.homeworklesson2.FragmentCallback;
 import com.example.homeworklesson2.R;
 
 public class HostFragment extends Fragment implements FragmentCallback {
+
     public static final String TAG = "HostFragmentTag";
-    // private final FragmentManager fragmentManager = getChildFragmentManager(); // почему не работает?
     private String currentFragmentTag;
 
     public HostFragment() {
         super(R.layout.fragment_host);
     }
 
+    @Nullable
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (savedInstanceState == null) {
             setFragment(new FirstFragment(), FirstFragment.TAG);
         }
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override
@@ -35,11 +38,9 @@ public class HostFragment extends Fragment implements FragmentCallback {
         }
         if (tag.equals(FirstFragment.TAG)) {
             setFragment(new FirstFragment(), FirstFragment.TAG);
-        }
-        if (tag.equals(SecondFragment.TAG)) {
+        } else {
             setFragment(new SecondFragment(), SecondFragment.TAG);
         }
-
     }
 
     @Override
@@ -47,8 +48,7 @@ public class HostFragment extends Fragment implements FragmentCallback {
         if (tag.equals(FirstFragment.TAG)) {
             Fragment fragment = SecondFragment.newInstance(message);
             setFragment(fragment, SecondFragment.TAG);
-        }
-        if (tag.equals(SecondFragment.TAG)) {
+        } else {
             Fragment fragment = FirstFragment.newInstance(message);
             setFragment(fragment, FirstFragment.TAG);
         }
@@ -62,5 +62,4 @@ public class HostFragment extends Fragment implements FragmentCallback {
                 .commit();
         currentFragmentTag = tag;
     }
-
 }
