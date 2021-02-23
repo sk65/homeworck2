@@ -23,9 +23,9 @@
         android:id="@+id/button_fragmentFirst_sendMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="372dp"
-        android:text="send"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="376dp"
+        android:text="@string/send"
         app:layout_constraintStart_toEndOf="@+id/editText_fragmentFirst"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,7 +36,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="144dp"
         android:fontFamily="sans-serif-black"
-        android:text="FIRST FRAGMENT"
+        android:text="@string/first_fragment"
         android:textSize="50sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

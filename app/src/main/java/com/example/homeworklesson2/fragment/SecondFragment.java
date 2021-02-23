@@ -41,7 +41,7 @@ public class SecondFragment extends Fragment implements View.OnClickListener {
             textView.setText(requireArguments().getString(MESSAGE_KEY));
         }
         editTextSendMessage = view.findViewById(R.id.editText_fragmentSecond);
-        view.findViewById(R.id.button_fragmentSecond_sendMesage).setOnClickListener(this);
+        view.findViewById(R.id.button_fragmentSecond_sendMessage).setOnClickListener(this);
     }
 
     @Override

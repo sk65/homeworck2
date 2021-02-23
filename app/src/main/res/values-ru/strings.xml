@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">домашнее задание </string>
+
+    <string name="first_fragment">Первый фрагмент</string>
+    <string name="second_fragment">Второй Фрагмент</string>
+    <string name="send">Отправить</string>
+
+    <!-- Preference Titles -->
+    <string name="settings_header">Настройки</string>
+
+    <!-- "Change theme Preferences -->
+    <string name="change_theme_title">изменить тему</string>
+
+    <!-- "Change languages Preferences -->
+    <string name="change_languages_title">выбрать язык</string>
+    <string name="language_russian">Russian</string>
+    <string name="language_english">English</string>
+
+    <string name="about">About</string>
+    <string name="settings">Настройки</string>
+
+
+    <string-array name="languages">
+        <item>@string/language_russian</item>
+        <item>@string/language_english</item>
+    </string-array>
+    <string name="text_snackBar">Отменить изменения</string>
+    <string name="snackBar_button_text">отмена</string>
+
+</resources>

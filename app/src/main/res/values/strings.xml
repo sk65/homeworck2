@@ -3,8 +3,8 @@
 
     <string name="first_fragment">first fragment</string>
     <string name="second_fragment">second fragment</string>
-    <string name="send">send</string>
-
+    <string name="send">Send</string>
+    <string name="text_snackBar">Do you wont to cancel changes</string>
     <!-- Preference Titles -->
     <string name="settings_header">Settings</string>
 
@@ -15,11 +15,14 @@
     <string name="change_languages_title">select language</string>
     <string name="language_russian">Russian</string>
     <string name="language_english">English</string>
+    <string name="about">About</string>
+    <string name="settings">Settings</string>
 
 
     <string-array name="languages">
         <item>@string/language_russian</item>
         <item>@string/language_english</item>
     </string-array>
+    <string name="snackBar_button_text">cancel</string>
 
 </resources>

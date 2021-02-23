@@ -1,5 +1,6 @@
 package com.example.homeworklesson2.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -12,10 +13,13 @@ import androidx.preference.PreferenceFragmentCompat;
 import com.example.homeworklesson2.R;
 import com.google.android.material.snackbar.Snackbar;
 
+import static android.app.Activity.RESULT_OK;
+
 public class SettingsFragment extends PreferenceFragmentCompat implements Preference.OnPreferenceChangeListener, View.OnClickListener {
     public static final String TAG = "SettingsFragmentTag";
-    private Snackbar snackbar;
     private boolean flag;
+    private ListPreference listPreferenceSelectLanguage;
+    public static final String MESSAGE_KEY = "com.example.homeworklesson2.fragment.settingsFragment.MESSAGE";
     private final String PREFERENCE_SELECT_LANGUAGE_KEY = "list_preference_selectLanguage";
     private final String PREFERENCE_CHANGE_THEME_KEY = "switchPreference_changeTheme";
 
@@ -28,7 +32,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ListPreference listPreferenceSelectLanguage = findPreference(PREFERENCE_SELECT_LANGUAGE_KEY);
+        listPreferenceSelectLanguage = findPreference(PREFERENCE_SELECT_LANGUAGE_KEY);
         if (listPreferenceSelectLanguage != null) {
             listPreferenceSelectLanguage.setOnPreferenceChangeListener(this);
         }
@@ -39,21 +43,23 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
         Snackbar snackbar =
                 Snackbar.make(getActivity().findViewById(
                         R.id.frameLayout_settingsActivity_mainContainer),
-                        "This is a SnackBar",
+                        R.string.text_snackBar,
                         Snackbar.LENGTH_LONG);
-        snackbar.setAction("cancel", this
-        );
+        snackbar.setAction(R.string.snackBar_button_text, this);
         snackbar.show();
-        return flag;
-
-    }
-
-    private void showSnackBar() {
-
+        return true;
     }
 
     @Override
     public void onClick(View v) {
-        flag = true;
+        Intent intent = new Intent();
+        intent.putExtra(MESSAGE_KEY, listPreferenceSelectLanguage.getValue());
+        getActivity().setResult(RESULT_OK, intent);
+
+        if (listPreferenceSelectLanguage.getValue().equals("English")) {
+            listPreferenceSelectLanguage.setValue("Russian");
+        }
+
     }
+
 }

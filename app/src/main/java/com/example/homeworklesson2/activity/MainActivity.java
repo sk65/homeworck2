@@ -3,23 +3,28 @@ package com.example.homeworklesson2.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.FragmentManager;
 
 import com.example.homeworklesson2.FragmentCallback;
 import com.example.homeworklesson2.R;
+import com.example.homeworklesson2.SendMessage;
+import com.example.homeworklesson2.fragment.DialogWindowFragment;
 import com.example.homeworklesson2.fragment.FirstFragment;
 import com.example.homeworklesson2.fragment.HostFragment;
 import com.example.homeworklesson2.fragment.SecondFragment;
+import com.example.homeworklesson2.fragment.SettingsFragment;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, SendMessage {
 
 
     @SuppressLint("ResourceAsColor")
@@ -50,21 +55,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return true;
     }
 
-    @SuppressLint("NonConstantResourceId")
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.settings:
                 Intent intent = new Intent(this, SettingsActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
                 break;
             case R.id.about:
-
+                new DialogWindowFragment().show(getSupportFragmentManager(), DialogWindowFragment.TAG);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressLint("NonConstantResourceId") // зачем эта анотация?
     @Override
     public void onClick(View v) {
         FragmentCallback fragmentCallback = (FragmentCallback) getSupportFragmentManager().findFragmentByTag(HostFragment.TAG);
@@ -74,4 +79,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             fragmentCallback.replaceFragment(SecondFragment.TAG);
         }
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (data == null) {
+            return;
+        }
+        String name = data.getStringExtra(SettingsFragment.MESSAGE_KEY);
+
+    }
+
+    @Override
+    public void sendMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+
+
 }

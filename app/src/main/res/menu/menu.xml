@@ -4,10 +4,10 @@
 
     <item
         android:id="@+id/about"
-        android:title="About"
+        android:title="@string/about"
         app:showAsAction="never" />
     <item
         android:id="@+id/settings"
-        android:title="Settings"
+        android:title="@string/settings"
         app:showAsAction="never" />
 </menu>
