@@ -1,9 +1,7 @@
 package com.example.homeworklesson2.activity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -12,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -26,8 +25,8 @@ import com.example.homeworklesson2.fragment.SettingsFragment;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, SendMessage {
 
+    private AlertDialog alertDialog;
 
-    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +53,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         inflater.inflate(R.menu.menu, menu);
         return true;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -83,18 +81,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (data == null) {
             return;
         }
-        String name = data.getStringExtra(SettingsFragment.MESSAGE_KEY);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        if (data.hasExtra(SettingsFragment.LANGUAGE_KEY)) {
+            builder.setMessage(SettingsFragment.LANGUAGE_KEY + " " + data.getStringExtra(SettingsFragment.LANGUAGE_KEY));
+        }
+        if (data.hasExtra(SettingsFragment.THEME_KEY)) {
+            builder.setMessage(SettingsFragment.THEME_KEY + " " + data.getStringExtra(SettingsFragment.THEME_KEY));
+        }
 
+        builder.setNegativeButton("OK", (dialog, which) -> alertDialog.hide());
+        alertDialog = builder.create();
+        alertDialog.show();
     }
 
     @Override
     public void sendMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
-
-
 }

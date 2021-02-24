@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">homeworkLesson2</string>
+    <string name="app_name">Homework</string>
 
     <string name="first_fragment">first fragment</string>
     <string name="second_fragment">second fragment</string>
