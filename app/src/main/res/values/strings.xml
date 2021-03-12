@@ -24,5 +24,6 @@
         <item>@string/language_english</item>
     </string-array>
     <string name="snackBar_button_text">cancel</string>
+    <string name="alertDialog_mainActivity_title">Changes</string>
 
 </resources>

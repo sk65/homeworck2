@@ -8,7 +8,7 @@
     tools:context=".activity.MainActivity">
 
     <LinearLayout
-        android:id="@+id/lineralLauout_acMain_container"
+        android:id="@+id/lineralLauout_mainActivity_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appBarLaiout_"
+            android:id="@+id/appBarLaiout_mainActivity"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize">
 
@@ -32,7 +32,7 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <LinearLayout
-            android:id="@+id/lineralLayout_acMain_container"
+            android:id="@+id/linearLayout_acMain_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="3"
@@ -45,7 +45,7 @@
                 android:layout_weight="1" />
 
             <LinearLayout
-                android:id="@+id/lineralLayout_acMain_buttonContainer"
+                android:id="@+id/linearLayout_acMain_buttonContainer"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="6"

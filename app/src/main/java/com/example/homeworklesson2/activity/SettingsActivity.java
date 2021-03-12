@@ -1,22 +1,21 @@
 package com.example.homeworklesson2.activity;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.example.homeworklesson2.R;
 import com.example.homeworklesson2.SendChanges;
-import com.example.homeworklesson2.SendMessage;
 import com.example.homeworklesson2.fragment.SettingsFragment;
 
 import java.util.Map;
 
-public class SettingsActivity extends AppCompatActivity implements SendChanges {
+import static com.example.homeworklesson2.activity.MainActivity.DEV_TEG;
 
-    private Map<String, String> settings;
+public class SettingsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,35 +32,20 @@ public class SettingsActivity extends AppCompatActivity implements SendChanges {
 
     @Override
     public void onBackPressed() {
-        System.out.println("onBackPressed()");
-        if (settings != null) {
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(SettingsFragment.TAG);
+        SendChanges sendChanges = (SendChanges) fragment;
+        if (sendChanges != null) {
+            Map<String, String> settings = sendChanges.sendChanges();
+            Log.i(DEV_TEG, "SettingsActivity onBackPressed " + settings.toString());
             Intent intent = new Intent();
             for (String key : settings.keySet()) {
                 intent.putExtra(key, settings.get(key));
             }
+            Log.i(DEV_TEG, "SettingsActivity onBackPressed " + intent.getExtras().toString());
             setResult(RESULT_OK, intent);
         }
+        finish();
         super.onBackPressed();
     }
 
-    @Override
-    protected void onStop() {
-        System.out.println("onStop");
-        if (settings != null) {
-            Intent intent = new Intent();
-            for (String key : settings.keySet()) {
-                intent.putExtra(key, settings.get(key));
-            }
-            setResult(RESULT_OK, intent);
-        }
-        super.onBackPressed();
-        super.onStop();
-    }
-
-    @Override
-    public void sendChanges(Map<String, String> settings) {
-        if (settings != null) {
-            this.settings = settings;
-        }
-    }
 }

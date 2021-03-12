@@ -4,5 +4,5 @@ import java.util.Map;
 
 public interface SendChanges {
 
-    void sendChanges(Map<String, String> settings);
+    Map<String, String> sendChanges( );
 }

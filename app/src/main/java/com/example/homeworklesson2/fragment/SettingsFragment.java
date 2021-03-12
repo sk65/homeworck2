@@ -2,6 +2,7 @@ package com.example.homeworklesson2.fragment;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -13,12 +14,15 @@ import androidx.preference.SwitchPreference;
 
 import com.example.homeworklesson2.R;
 import com.example.homeworklesson2.SendChanges;
+import com.example.homeworklesson2.activity.MainActivity;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class SettingsFragment extends PreferenceFragmentCompat implements Preference.OnPreferenceChangeListener {
+import static com.example.homeworklesson2.activity.MainActivity.DEV_TEG;
+
+public class SettingsFragment extends PreferenceFragmentCompat implements Preference.OnPreferenceChangeListener, SendChanges {
     public static final String TAG = "SettingsFragmentTag";
     private boolean languageChangesFlag;
     private boolean themeChangesFlag;
@@ -28,6 +32,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
     private final String PREFERENCE_CHANGE_THEME_KEY = "switchPreference_changeTheme";
     public static final String LANGUAGE_KEY = "Language";
     public static final String THEME_KEY = "Theme";
+
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -45,8 +50,6 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        themeChangesFlag = true;
-        languageChangesFlag = true;
         Snackbar snackbar =
                 Snackbar.make(getActivity().findViewById(
                         R.id.frameLayout_settingsActivity_mainContainer),
@@ -54,6 +57,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
                         Snackbar.LENGTH_LONG);
         switch (preference.getKey()) {
             case PREFERENCE_CHANGE_THEME_KEY:
+                themeChangesFlag = true;
                 snackbar.setAction(R.string.snackBar_button_text, (v) -> {
                     themeChangesFlag = false;
                     if (switchPreferenceSelectTheme.isChecked()) {
@@ -62,10 +66,11 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
                 });
                 break;
             case PREFERENCE_SELECT_LANGUAGE_KEY:
+                languageChangesFlag = true;
                 snackbar.setAction(R.string.snackBar_button_text, (v) -> {
                     languageChangesFlag = false;
-                    if (listPreferenceSelectLanguage.getValue().equals("English")) {
-                        listPreferenceSelectLanguage.setValue("Russian");
+                    if (listPreferenceSelectLanguage.getValue().equals(getString(R.string.language_english))) {
+                        listPreferenceSelectLanguage.setValue(getString(R.string.language_russian));
                     }
                 });
                 break;
@@ -74,10 +79,10 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
         return true;
     }
 
+
     @Override
-    public void onStop() {
+    public Map<String, String> sendChanges() {
         if (languageChangesFlag || themeChangesFlag) {
-            SendChanges sendChanges = (SendChanges) getActivity();
             Map<String, String> settings = new HashMap<>();
             if (languageChangesFlag) {
                 settings.put(LANGUAGE_KEY, listPreferenceSelectLanguage.getValue());
@@ -89,8 +94,8 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
                     settings.put(THEME_KEY, "black");
                 }
             }
-            sendChanges.sendChanges(settings);
+            return settings;
         }
-        super.onStop();
+        return null;
     }
 }

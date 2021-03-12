@@ -26,5 +26,6 @@
     </string-array>
     <string name="text_snackBar">Отменить изменения</string>
     <string name="snackBar_button_text">отмена</string>
+    <string name="alertDialog_mainActivity_title">Изменения</string>
 
 </resources>

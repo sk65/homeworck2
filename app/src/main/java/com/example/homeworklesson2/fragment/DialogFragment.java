@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,7 @@ import android.widget.EditText;
 import com.example.homeworklesson2.R;
 import com.example.homeworklesson2.SendMessage;
 
-public class DialogWindowFragment extends DialogFragment implements View.OnClickListener {
+public class DialogFragment extends androidx.fragment.app.DialogFragment implements View.OnClickListener {
     public static final String TAG = "DialogWindowFragment";
     private EditText editText;
 
